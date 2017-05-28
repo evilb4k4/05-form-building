@@ -12,6 +12,19 @@
     <!-- NOTE (stretch goal): To fully incorporate the highlighting library "hljs" we need to fill the empty link tag below to refer to a CSS file that will handle our text highlighting -->
     <link>
     <!-- TODO: We want our new article form to be able to display a preview of the article that is being entered. Thus, we need code here that will recreate the same structure of our other articles. What do you think we need to add here? -->
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+        <header>
+          <h1>{{title}}</h1>
+          <div class="byline">
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishStatus}}
+          </div>
+        </header>
+        <section class="article-body">{{{body}}}</section>
+        <a href="#" class="read-on">Read on &rarr;</a>
+      </article>
+    </script>
     </head>
   <body>
     <header class="site-header clearfix">
@@ -41,9 +54,22 @@
                    4. Author's URL
                    5. Article category
                    6. Some way to know if this article is a draft or is published -->
-      </section>
+       <form id="new-form">
+         <label><input type="text" id="article-title" placeholder="Article Title" required></label>
 
-      <section id="articles" class="tab-content">
+         <label><textarea id="ariticle-body" rows="8" cols="40" placeholder="Type your ariticle here!!!" required></textarea></label>
+
+         <label><input type="text" id="article-author" placeholder="Author Name" required></label>
+
+         <label><input type="text" id="article-author-url" placeholder="Author's Url" required></label>
+
+         <label><input type="text" id="article-category" placeholder="Category" required></label>
+
+         <label><input type="checkbox" id="article-published">Published</label>
+       </form>
+      </section>
+<!-- add preview to the id. -->
+      <section id="articles-preview" class="tab-content">
         <!-- NOTE: This is where we will display our article preview -->
       </section>
 
@@ -59,13 +85,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
     <!-- NOTE (stretch goal): Include script tags for 3rd party libraries to enable Markdown rendering and code syntax highlighting. If we are not using a CDN and instead choose to store these scripts with our project, make sure to put them into an appropriate location in the 'vendor' directory. Keep in mind that if we want these features to render properly on our main blog page (index.html) that we'll need to add those scripts over there, too. -->
-    <script src="/scripts/blogArticles.js"></script>
+    <script src="/scripts/blogArticles.js"></script> //this tag is not necessary
     <script src="/scripts/article.js"></script>
     <script src="/scripts/articleView.js"></script>
     <script>
       // TODO: We will need to call a function here to initialize the behaviors on this page, once we get them built out. Why?
       // (Look at the bottom of index.html as a reference. Since we are now using our JS on two different HTML pages that have different needs as to what parts of the code they utilize, we need to build a function that inializes each page.)
       //  Hint: Look in articleView.js for a function that does this.
+      articleView.initNewArticlePage();
     </script>
   </body>
 </html>
